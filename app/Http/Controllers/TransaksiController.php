@@ -87,7 +87,8 @@ class TransaksiController extends Controller
             return redirect()->route('transaksi.index')->with('success', 'Data berhasil disimpan');
         } catch (\Throwable $th) {
             //throw $th;
-            dd($th);
+            // dd($th);
+            DB::rollBack();
             return redirect()->route('transaksi.index')->with('danger', $th->getMessage());
 
         }
@@ -163,7 +164,7 @@ class TransaksiController extends Controller
         } catch (\Throwable $th) {
             //throw $th;
             DB::rollBack();
-            dd($th);
+            // dd($th);
             return response()->json([
                 'success' => false,
                 'message' => 'Gagal Menghapus Data',
